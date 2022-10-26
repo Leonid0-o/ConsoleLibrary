@@ -165,6 +165,7 @@ namespace ConsoleLibrary
                         }
                     }
                 }
+
                 menu.Print();
                 n = int.Parse(Console.ReadLine());
                 if (n == 1)
