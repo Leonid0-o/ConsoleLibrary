@@ -20,6 +20,7 @@ namespace ConsoleLibrary
             this.id = id;
         }
     }
+
     class Book : Order
     {
         private string author;
@@ -76,7 +77,7 @@ namespace ConsoleLibrary
         {
             this.availability = availability;
         }
-        public void Print()
+        public void Output()
         {
             Console.WriteLine("Id: " + id);
             Console.WriteLine("Автор: " + author);
@@ -93,7 +94,7 @@ namespace ConsoleLibrary
     }
     class Menu
     {
-        public void PrintMenu()
+        public void Print()
         {
             Console.WriteLine("1 - Просмотреть полный каталог");
             Console.WriteLine("2 - Купить книгу");
@@ -126,7 +127,7 @@ namespace ConsoleLibrary
             book[count].SetId(6778);
             book[count].SetAuthor("Аджей Сапковский");
             book[count].SetName("Послееднее желание");
-            book[count].SetPublication ("ACT");
+            book[count].SetPublication("ACT");
             book[count].SetYear(1986);
             book[count].SetPrice(450);
             book[count].SetAvailability(true);
@@ -164,7 +165,7 @@ namespace ConsoleLibrary
                         }
                     }
                 }
-                menu.PrintMenu();
+                menu.Print();
                 n = int.Parse(Console.ReadLine());
                 if (n == 1)
                 {
@@ -175,7 +176,7 @@ namespace ConsoleLibrary
                             break;
                         else
                         {
-                            Element.Print();
+                            Element.Output();
                         }
                     }
                     continuation.Continue();
@@ -185,8 +186,8 @@ namespace ConsoleLibrary
                     Console.Clear();
                     Console.Write("Введите id книги: ");
                     temp = int.Parse(Console.ReadLine());
-                    bool btemp = false;
-                    bool btemp1 = false;
+                    bool btemp = RetFalse();
+                    bool btemp1 = RetFalse();
                     int temptemp = 0;
                     foreach (var Element in book)
                     {
@@ -200,10 +201,10 @@ namespace ConsoleLibrary
                             }
                             if (btemp)
                             {
-                               if (Element.GetАvailability())
-                               {
+                                if (Element.GetАvailability())
+                                {
                                     btemp1 = true;
-                               }
+                                }
                                 break;
                             }
                             temptemp++;
@@ -282,6 +283,11 @@ namespace ConsoleLibrary
                     }
                 }
             } while (n != 0);
+        }
+
+        private static bool RetFalse()
+        {
+            return false;
         }
     }
 }
