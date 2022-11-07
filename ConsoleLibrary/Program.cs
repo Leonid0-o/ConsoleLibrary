@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
@@ -8,6 +9,102 @@ using System.Threading.Tasks;
 
 namespace ConsoleLibrary
 {
+    class Payment
+    {
+        protected double money;
+    }
+    class PaymentA : Payment
+    {
+        public PaymentA()
+        {
+            money = 300;
+        }
+        public double Get()
+        {
+            return money;
+        }
+    }
+    class PaymentB : Payment
+    {
+        public PaymentB()
+        {
+            money = 500;
+        }
+        public double Get()
+        {
+            return money;
+        }
+    }
+    class PaymentC : Payment
+    {
+        public PaymentC()
+        {
+            money = 2000;
+        }
+        public double Get()
+        {
+            return money;
+        }
+    }
+    class Computer
+    { 
+        public void Start()
+        {
+            Console.WriteLine("Для включения компьютера нажмите любую клавишу");
+            Console.ReadKey();
+            Console.Clear();
+            Desktop();
+        }
+        public void Desktop()
+        {
+            int temp;
+            Console.WriteLine("1 - Открыть программу книжный магазин\n2 - выключить компьютер\n3 - открыть браузер и смотреть на котиков");
+            Console.Write("Ввод: ");
+            temp = int.Parse(Console.ReadLine());
+            if (temp == 1)
+                Console.Clear();
+            else if (temp == 2)
+            {
+                Console.Clear();
+                Start();
+            }
+            else if (temp == 3)
+            {
+                Console.Clear();
+                Console.WriteLine("Запрос пользователя: Котики\nОтвет браузера:");
+                Console.WriteLine("▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+                Console.WriteLine("▄▀░░░░░░░░░░░░░░░░░▀▄");
+                Console.WriteLine("▄▀░░░▄▄─▄▄▀▀▄▀▀▄░░░▀▄");
+                Console.WriteLine("▄▀░░███████───▄▀░░░▀▄");
+                Console.WriteLine("▄▀░░▀█████▀▀▄▀░░░░░▀▄");
+                Console.WriteLine("▄▀░░░░▀█▀░░░░░░░░░░▀▄");
+                Console.WriteLine("▄▀░░░░░░░░░░░░░░░░░▀▄");
+                Console.WriteLine("▄▀░░░░█░░░█░░░░░░░░▀▄");
+                Console.WriteLine("▄▀░░▄▀█▄▄▄█▀▄░░░░░░▀▄");
+                Console.WriteLine("▄▀░░█──▄─▄──█░░░░░░▀▄");
+                Console.WriteLine("▄▀░░█▄─▀▄▀─▄██▄░░░░▀▄");
+                Console.WriteLine("▄▀░░░██▄▄▄██▀▀▀█░░░▀▄");
+                Console.WriteLine("▄▀░░░▀████▀────█░░░▀▄");
+                Console.WriteLine("▄▀░░░░▀██▀─────█░░░▀▄");
+                Console.WriteLine("▄▀░░░░░█▀──────█░░░▀▄");
+                Console.WriteLine("▄▀░░░░░█──────██░░░▀▄");
+                Console.WriteLine("▄▀░░░░█▀─█▀──▄██░░░▀▄");
+                Console.WriteLine("▄▀░░░░█▄▄█▄▄████▄░░▀▄");
+                Console.WriteLine("▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄");
+                Console.WriteLine("Для закрытия браузера нажмите любую клавишу");
+                Console.ReadKey(true);
+                Console.Clear();
+                Desktop();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Взрыв компьютера");
+                Environment.Exit(0);
+            }
+
+        }
+    }
     class Order
     {
         protected int id;
@@ -116,6 +213,8 @@ namespace ConsoleLibrary
     {
         static void Main(string[] args)
         {
+            Computer computer = new Computer();
+            computer.Start();
             int size = 100;
             int count = 0;
             int count1 = 0;
@@ -214,8 +313,29 @@ namespace ConsoleLibrary
                     {
                         if (btemp1)
                         {
-                            Console.WriteLine("Ваш заказ оформлен");
-                            continuation.Continue();
+                            PaymentA paymentA = new PaymentA();
+                            PaymentB paymentB = new PaymentB();
+                            PaymentC paymentC = new PaymentC();
+                            if (book[temptemp].GetPrice() < paymentA.Get())
+                            {
+                                Console.WriteLine("Ваш заказ оформлен");
+                                continuation.Continue();
+                            }
+                            else if (book[temptemp].GetPrice() < paymentB.Get())
+                            {
+                                Console.WriteLine("Ваш заказ оформлен");
+                                continuation.Continue();
+                            }
+                            else if (book[temptemp].GetPrice() < paymentC.Get())
+                            {
+                                Console.WriteLine("Ваш заказ оформлен");
+                                continuation.Continue();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Не достаточно средств");
+                                continuation.Continue();
+                            }
                         }
                         else
                         {
@@ -283,6 +403,8 @@ namespace ConsoleLibrary
                     }
                 }
             } while (n != 0);
+            Console.Clear();
+            computer.Desktop();
         }
 
         private static bool RetFalse()
